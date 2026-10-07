@@ -1,4 +1,4 @@
-```python
+
 import streamlit as st
 import requests
 import re
@@ -1327,4 +1327,3 @@ st.caption(
     "| JSearch + Intelligent Skills Matching"
 
 )
-```
