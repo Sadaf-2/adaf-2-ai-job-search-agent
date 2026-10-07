@@ -21,263 +21,168 @@ st.set_page_config(
 # CUSTOM CSS
 # =========================================================
 
-st.markdown("""
-<style>
+st.markdown(
+    """
+    <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    .stApp {
+        background-color: #0b1120;
+    }
 
-html, body, [class*="css"] {
-    font-family: 'Inter', sans-serif;
-}
+    [data-testid="stSidebar"] {
+        background-color: #111827;
+        border-right: 1px solid #263244;
+    }
 
-.stApp {
-    background:
-        radial-gradient(
-            circle at 10% 0%,
-            rgba(99, 102, 241, 0.14),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 90% 10%,
-            rgba(14, 165, 233, 0.10),
-            transparent 25%
-        ),
-        #0b1020;
-    color: #f8fafc;
-}
+    .main-title {
+        font-size: 42px;
+        font-weight: 800;
+        color: #f8fafc;
+        margin-bottom: 5px;
+    }
 
-/* Sidebar */
+    .subtitle {
+        color: #94a3b8;
+        font-size: 16px;
+        margin-bottom: 28px;
+    }
 
-section[data-testid="stSidebar"] {
-    background: #0f172a;
-    border-right: 1px solid #1e293b;
-}
+    .hero-box {
+        background: #111827;
+        border: 1px solid #263244;
+        border-radius: 18px;
+        padding: 28px;
+        margin-bottom: 25px;
+    }
 
-section[data-testid="stSidebar"] h1,
-section[data-testid="stSidebar"] h2,
-section[data-testid="stSidebar"] h3 {
-    color: #f8fafc;
-}
+    .hero-small {
+        color: #818cf8;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
 
-/* Main */
+    .hero-heading {
+        color: #f8fafc;
+        font-size: 34px;
+        font-weight: 800;
+        margin-top: 8px;
+    }
 
-.main .block-container {
-    max-width: 1250px;
-    padding-top: 2rem;
-    padding-bottom: 4rem;
-}
+    .hero-text {
+        color: #94a3b8;
+        font-size: 15px;
+        line-height: 1.6;
+    }
 
-/* Hero */
+    .stat-box {
+        background: #111827;
+        border: 1px solid #263244;
+        border-radius: 15px;
+        padding: 18px;
+        text-align: center;
+    }
 
-.hero {
-    padding: 35px 38px;
-    border: 1px solid #26324a;
-    border-radius: 24px;
-    background:
-        linear-gradient(
-            135deg,
-            rgba(30, 41, 59, 0.95),
-            rgba(15, 23, 42, 0.85)
-        );
-    margin-bottom: 25px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.22);
-}
+    .stat-value {
+        color: #818cf8;
+        font-size: 28px;
+        font-weight: 800;
+    }
 
-.hero-badge {
-    display: inline-block;
-    padding: 7px 13px;
-    border-radius: 999px;
-    background: rgba(99,102,241,0.14);
-    border: 1px solid rgba(129,140,248,0.30);
-    color: #a5b4fc;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 14px;
-}
+    .stat-label {
+        color: #94a3b8;
+        font-size: 13px;
+        margin-top: 4px;
+    }
 
-.hero h1 {
-    font-size: 42px;
-    line-height: 1.1;
-    margin: 0;
-    font-weight: 800;
-    letter-spacing: -1.5px;
-}
+    .job-box {
+        background: #111827;
+        border: 1px solid #263244;
+        border-radius: 16px;
+        padding: 22px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
 
-.hero p {
-    color: #94a3b8;
-    font-size: 16px;
-    margin-top: 13px;
-    max-width: 700px;
-    line-height: 1.7;
-}
+    .job-title {
+        color: #f8fafc;
+        font-size: 20px;
+        font-weight: 700;
+    }
 
-/* Search box */
+    .job-company {
+        color: #94a3b8;
+        font-size: 14px;
+        margin-top: 4px;
+    }
 
-.search-panel {
-    background: rgba(15,23,42,0.85);
-    border: 1px solid #26324a;
-    border-radius: 20px;
-    padding: 24px;
-    margin-bottom: 28px;
-}
+    .match-score {
+        color: #818cf8;
+        font-size: 28px;
+        font-weight: 800;
+        text-align: center;
+    }
 
-/* Buttons */
+    .match-text {
+        color: #94a3b8;
+        font-size: 12px;
+        text-align: center;
+    }
 
-.stButton > button {
-    width: 100%;
-    border-radius: 12px;
-    border: 1px solid #6366f1;
-    background: linear-gradient(
-        135deg,
-        #6366f1,
-        #4f46e5
-    );
-    color: white;
-    font-weight: 700;
-    padding: 11px 20px;
-    transition: 0.2s ease;
-}
+    .section-title {
+        color: #f8fafc;
+        font-size: 25px;
+        font-weight: 750;
+        margin-top: 28px;
+        margin-bottom: 10px;
+    }
 
-.stButton > button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 25px rgba(99,102,241,0.25);
-}
+    .skill-title {
+        color: #94a3b8;
+        font-size: 12px;
+        font-weight: 700;
+        margin-top: 15px;
+        margin-bottom: 7px;
+        letter-spacing: 0.5px;
+    }
 
-/* Inputs */
+    .skill {
+        display: inline-block;
+        background: #172554;
+        border: 1px solid #3730a3;
+        color: #c7d2fe;
+        padding: 5px 9px;
+        border-radius: 20px;
+        font-size: 12px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
 
-div[data-baseweb="input"] > div,
-div[data-baseweb="select"] > div {
-    background: #111827 !important;
-    border-color: #334155 !important;
-    border-radius: 10px !important;
-}
+    .missing {
+        display: inline-block;
+        background: #3f1722;
+        border: 1px solid #7f1d1d;
+        color: #fda4af;
+        padding: 5px 9px;
+        border-radius: 20px;
+        font-size: 12px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
 
-input {
-    color: white !important;
-}
+    .footer {
+        color: #64748b;
+        text-align: center;
+        margin-top: 45px;
+        padding: 20px;
+        border-top: 1px solid #1e293b;
+        font-size: 12px;
+    }
 
-/* Section */
-
-.section-title {
-    font-size: 25px;
-    font-weight: 750;
-    margin-top: 15px;
-    margin-bottom: 16px;
-}
-
-/* Job Card */
-
-.job-card {
-    background: linear-gradient(
-        145deg,
-        rgba(17,24,39,0.98),
-        rgba(15,23,42,0.95)
-    );
-    border: 1px solid #273449;
-    border-radius: 18px;
-    padding: 24px;
-    margin-bottom: 18px;
-    box-shadow: 0 12px 35px rgba(0,0,0,0.18);
-}
-
-.job-title {
-    color: #f8fafc;
-    font-size: 21px;
-    font-weight: 750;
-    margin-bottom: 5px;
-}
-
-.company {
-    color: #94a3b8;
-    font-size: 14px;
-    margin-bottom: 15px;
-}
-
-.meta {
-    color: #cbd5e1;
-    font-size: 13px;
-    margin-bottom: 8px;
-}
-
-/* Match */
-
-.match-box {
-    text-align: center;
-    padding: 13px 18px;
-    border-radius: 14px;
-    background: rgba(99,102,241,0.10);
-    border: 1px solid rgba(99,102,241,0.25);
-}
-
-.match-number {
-    font-size: 30px;
-    font-weight: 800;
-    color: #a5b4fc;
-}
-
-.match-label {
-    color: #94a3b8;
-    font-size: 12px;
-}
-
-/* Skill chips */
-
-.skill-chip {
-    display: inline-block;
-    padding: 5px 10px;
-    margin: 3px;
-    border-radius: 999px;
-    background: #172554;
-    color: #bfdbfe;
-    border: 1px solid #1e40af;
-    font-size: 12px;
-}
-
-.missing-chip {
-    display: inline-block;
-    padding: 5px 10px;
-    margin: 3px;
-    border-radius: 999px;
-    background: #3f1d24;
-    color: #fda4af;
-    border: 1px solid #7f1d1d;
-    font-size: 12px;
-}
-
-/* Stats */
-
-.stat-card {
-    background: rgba(15,23,42,0.85);
-    border: 1px solid #26324a;
-    border-radius: 16px;
-    padding: 18px;
-    text-align: center;
-}
-
-.stat-number {
-    font-size: 27px;
-    font-weight: 800;
-    color: #a5b4fc;
-}
-
-.stat-label {
-    color: #94a3b8;
-    font-size: 12px;
-}
-
-/* Footer */
-
-.footer {
-    text-align: center;
-    color: #64748b;
-    font-size: 12px;
-    margin-top: 45px;
-    padding-top: 20px;
-    border-top: 1px solid #1e293b;
-}
-
-</style>
-""", unsafe_allow_html=True)
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 
 # =========================================================
@@ -295,6 +200,176 @@ PAKISTAN_CITIES = {
     "Multan": "Multan",
     "Quetta": "Quetta",
     "Abbottabad": "Abbottabad"
+}
+
+
+SKILL_ALIASES = {
+
+    "html": ["html", "html5"],
+
+    "css": ["css", "css3"],
+
+    "javascript": [
+        "javascript",
+        "javascript",
+        "ecmascript"
+    ],
+
+    "typescript": [
+        "typescript",
+        "typescript"
+    ],
+
+    "react": [
+        "react",
+        "react.js",
+        "reactjs"
+    ],
+
+    "python": [
+        "python"
+    ],
+
+    "java": [
+        "java"
+    ],
+
+    "php": [
+        "php"
+    ],
+
+    "node": [
+        "node",
+        "node.js",
+        "nodejs"
+    ],
+
+    "fastapi": [
+        "fastapi"
+    ],
+
+    "flask": [
+        "flask"
+    ],
+
+    "django": [
+        "django"
+    ],
+
+    "sql": [
+        "sql",
+        "mysql",
+        "postgresql",
+        "postgres"
+    ],
+
+    "mongodb": [
+        "mongodb",
+        "mongo"
+    ],
+
+    "git": [
+        "git",
+        "github",
+        "gitlab"
+    ],
+
+    "figma": [
+        "figma"
+    ],
+
+    "ui/ux": [
+        "ui/ux",
+        "ui ux",
+        "user interface",
+        "user experience"
+    ],
+
+    "api": [
+        "api",
+        "rest api",
+        "restful api"
+    ],
+
+    "redux": [
+        "redux"
+    ],
+
+    "nextjs": [
+        "next.js",
+        "nextjs"
+    ],
+
+    "tailwind": [
+        "tailwind",
+        "tailwind css"
+    ],
+
+    "bootstrap": [
+        "bootstrap"
+    ],
+
+    "docker": [
+        "docker"
+    ],
+
+    "aws": [
+        "aws"
+    ],
+
+    "azure": [
+        "azure"
+    ],
+
+    "flutter": [
+        "flutter"
+    ],
+
+    "react native": [
+        "react native"
+    ]
+}
+
+
+ROLE_ALIASES = {
+    "web developer": [
+        "web developer",
+        "web development",
+        "frontend developer",
+        "front end developer",
+        "full stack developer",
+        "full-stack developer"
+    ],
+
+    "frontend developer": [
+        "frontend developer",
+        "front end developer",
+        "front-end developer",
+        "frontend engineer"
+    ],
+
+    "backend developer": [
+        "backend developer",
+        "back end developer",
+        "back-end developer"
+    ],
+
+    "software developer": [
+        "software developer",
+        "software engineer"
+    ],
+
+    "full stack developer": [
+        "full stack developer",
+        "full-stack developer"
+    ],
+
+    "ui/ux designer": [
+        "ui/ux designer",
+        "ui ux designer",
+        "ux designer",
+        "ui designer"
+    ]
 }
 
 
@@ -354,42 +429,6 @@ TECH_KEYWORDS = [
 ]
 
 
-SKILL_ALIASES = {
-    "html": ["html", "html5"],
-    "css": ["css", "css3"],
-    "javascript": ["javascript", "js", "ecmascript"],
-    "typescript": ["typescript", "ts"],
-    "react": ["react", "react.js", "reactjs"],
-    "python": ["python"],
-    "java": ["java"],
-    "php": ["php"],
-    "node": ["node", "node.js", "nodejs"],
-    "fastapi": ["fastapi"],
-    "flask": ["flask"],
-    "django": ["django"],
-    "sql": ["sql", "mysql", "postgresql", "postgres"],
-    "mongodb": ["mongodb", "mongo"],
-    "git": ["git", "github", "gitlab"],
-    "figma": ["figma"],
-    "ui/ux": [
-        "ui/ux",
-        "ui ux",
-        "user interface",
-        "user experience"
-    ],
-    "api": ["api", "rest api", "restful api"],
-    "redux": ["redux"],
-    "nextjs": ["next.js", "nextjs"],
-    "tailwind": ["tailwind", "tailwind css"],
-    "bootstrap": ["bootstrap"],
-    "docker": ["docker"],
-    "aws": ["aws"],
-    "azure": ["azure"],
-    "flutter": ["flutter"],
-    "react native": ["react native"]
-}
-
-
 # =========================================================
 # FUNCTIONS
 # =========================================================
@@ -418,26 +457,49 @@ def clean_text(value):
     return text.strip()
 
 
-def get_user_skills(skill_text):
+def get_user_skills(text):
 
     skills = []
 
-    for skill in skill_text.split(","):
+    for item in text.split(","):
 
-        skill = skill.strip().lower()
+        item = item.strip().lower()
 
-        if skill and skill not in skills:
-            skills.append(skill)
+        if not item:
+            continue
+
+        if item in ROLE_ALIASES:
+
+            continue
+
+        if item not in skills:
+
+            skills.append(item)
 
     return skills
+
+
+def get_user_roles(text):
+
+    roles = []
+
+    for item in text.split(","):
+
+        item = item.strip().lower()
+
+        if item in ROLE_ALIASES:
+
+            roles.append(item)
+
+    return roles
 
 
 def is_tech_job(title, description):
 
     text = (
-        clean_text(title)
+        title
         + " "
-        + clean_text(description)
+        + description
     ).lower()
 
     return any(
@@ -448,6 +510,7 @@ def is_tech_job(title, description):
 
 def calculate_match(
     user_skills,
+    user_roles,
     title,
     description
 ):
@@ -458,7 +521,7 @@ def calculate_match(
         + clean_text(description)
     ).lower()
 
-    matched = []
+    matched_skills = []
 
     for skill in user_skills:
 
@@ -471,20 +534,62 @@ def calculate_match(
 
             if alias.lower() in text:
 
-                matched.append(skill)
+                matched_skills.append(
+                    skill
+                )
 
                 break
 
-    if not user_skills:
-        return 0, []
+
+    matched_roles = []
+
+    for role in user_roles:
+
+        aliases = ROLE_ALIASES.get(
+            role,
+            [role]
+        )
+
+        for alias in aliases:
+
+            if alias.lower() in text:
+
+                matched_roles.append(
+                    role
+                )
+
+                break
+
+
+    total_items = (
+        len(user_skills)
+        + len(user_roles)
+    )
+
+
+    matched_items = (
+        len(matched_skills)
+        + len(matched_roles)
+    )
+
+
+    if total_items == 0:
+
+        return 0, [], []
+
 
     score = int(
-        len(matched)
-        / len(user_skills)
+        matched_items
+        / total_items
         * 100
     )
 
-    return score, matched
+
+    return (
+        score,
+        matched_skills,
+        matched_roles
+    )
 
 
 def find_missing_skills(
@@ -539,7 +644,9 @@ def find_missing_skills(
 
             if alias.lower() in text:
 
-                missing.append(skill)
+                missing.append(
+                    skill
+                )
 
                 break
 
@@ -547,7 +654,7 @@ def find_missing_skills(
 
 
 def get_jobs(
-    skills,
+    search_text,
     location,
     api_key,
     job_type
@@ -560,56 +667,67 @@ def get_jobs(
 
     headers = {
         "X-RapidAPI-Key": api_key,
-        "X-RapidAPI-Host": "jsearch.p.rapidapi.com"
+        "X-RapidAPI-Host":
+            "jsearch.p.rapidapi.com"
     }
 
-    if skills:
-
-        skill_query = " ".join(
-            skills[:3]
-        )
-
-    else:
-
-        skill_query = "software developer"
 
     if location:
 
         query = (
-            f"{skill_query} jobs "
+            f"{search_text} jobs "
             f"in {location} Pakistan"
         )
 
     else:
 
         query = (
-            f"{skill_query} jobs "
+            f"{search_text} jobs "
             f"in Pakistan"
         )
 
+
     params = {
+
         "query": query,
+
         "num_pages": "1",
+
         "country": "pk",
+
         "language": "en",
+
         "date_posted": "all"
     }
 
+
     if job_type == "Full-time":
 
-        params["employment_types"] = "FULLTIME"
+        params[
+            "employment_types"
+        ] = "FULLTIME"
+
 
     elif job_type == "Part-time":
 
-        params["employment_types"] = "PARTTIME"
+        params[
+            "employment_types"
+        ] = "PARTTIME"
+
 
     elif job_type == "Internship":
 
-        params["employment_types"] = "INTERN"
+        params[
+            "employment_types"
+        ] = "INTERN"
+
 
     elif job_type == "Contract":
 
-        params["employment_types"] = "CONTRACTOR"
+        params[
+            "employment_types"
+        ] = "CONTRACTOR"
+
 
     response = requests.get(
         url,
@@ -617,6 +735,7 @@ def get_jobs(
         params=params,
         timeout=30
     )
+
 
     if response.status_code != 200:
 
@@ -626,20 +745,14 @@ def get_jobs(
             f"{response.text}"
         )
 
-    try:
 
-        result = response.json()
-
-    except Exception:
-
-        raise Exception(
-            "JSearch returned invalid JSON."
-        )
+    result = response.json()
 
     data = result.get(
         "data",
         []
     )
+
 
     if isinstance(
         data,
@@ -647,6 +760,7 @@ def get_jobs(
     ):
 
         return data
+
 
     if isinstance(
         data,
@@ -664,6 +778,7 @@ def get_jobs(
         ):
 
             return jobs
+
 
     return []
 
@@ -690,16 +805,7 @@ except Exception:
 with st.sidebar:
 
     st.markdown(
-        """
-        <div style="
-            font-size:26px;
-            font-weight:800;
-            margin-bottom:5px;
-        ">
-            💼 JobPilot AI
-        </div>
-        """,
-        unsafe_allow_html=True
+        "## 💼 JobPilot AI"
     )
 
     st.caption(
@@ -745,7 +851,7 @@ with st.sidebar:
         "🔢 Results",
         5,
         30,
-        15
+        10
     )
 
     st.divider()
@@ -755,10 +861,10 @@ with st.sidebar:
         **How it works**
 
         1. Enter your skills
-        2. Select your preferred location
-        3. Search live job listings
-        4. Compare skill matches
-        5. Identify skills to learn
+        2. Select a location
+        3. Search live jobs
+        4. Compare your skills
+        5. Find missing skills
         6. Apply directly
         """
     )
@@ -769,63 +875,69 @@ with st.sidebar:
 # =========================================================
 
 st.markdown(
-    """
-    <div class="hero">
-
-        <div class="hero-badge">
-            ✨ AI-POWERED CAREER ASSISTANT
-        </div>
-
-        <h1>
-            Find your next opportunity.
-        </h1>
-
-        <p>
-            Search technology jobs across Pakistan,
-            discover how well your skills match,
-            identify missing skills, and apply faster.
-        </p>
-
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-
-# =========================================================
-# SEARCH PANEL
-# =========================================================
-
-st.markdown(
-    '<div class="search-panel">',
+    '<div class="hero-box">',
     unsafe_allow_html=True
 )
 
 st.markdown(
-    "### 🔎 What can you do?",
-)
-
-skills_input = st.text_input(
-    "Your skills",
-    placeholder=(
-        "e.g. HTML, CSS, JavaScript, React, Figma"
-    ),
-    label_visibility="collapsed"
-)
-
-search_clicked = st.button(
-    "🚀  Find My Best Jobs",
-    type="primary"
+    '<div class="hero-small">'
+    '✨ AI-POWERED CAREER ASSISTANT'
+    '</div>',
+    unsafe_allow_html=True
 )
 
 st.markdown(
-    "</div>",
+    '<div class="hero-heading">'
+    'Find your next opportunity.'
+    '</div>',
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    '<div class="hero-text">'
+    'Search technology jobs across Pakistan, '
+    'compare your skills with real job requirements, '
+    'discover what you should learn next, and apply faster.'
+    '</div>',
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    '</div>',
     unsafe_allow_html=True
 )
 
 
 # =========================================================
 # SEARCH
+# =========================================================
+
+st.markdown(
+    "### 🔎 Search Jobs"
+)
+
+skills_input = st.text_input(
+    "Skills or job role",
+    placeholder=(
+        "Example: HTML, CSS, JavaScript, React"
+    )
+)
+
+st.caption(
+    "Tip: You can enter a job role too, e.g. "
+    "Web Developer or Frontend Developer."
+)
+
+
+search_clicked = st.button(
+    "🚀 Find My Best Jobs",
+    type="primary",
+    use_container_width=True
+)
+
+
+# =========================================================
+# SEARCH ACTION
 # =========================================================
 
 if search_clicked:
@@ -843,7 +955,7 @@ if search_clicked:
     if not skills_input.strip():
 
         st.warning(
-            "Please enter at least one skill."
+            "Please enter your skills or job role."
         )
 
         st.stop()
@@ -853,6 +965,17 @@ if search_clicked:
         skills_input
     )
 
+    user_roles = get_user_roles(
+        skills_input
+    )
+
+
+    # If no recognized role,
+    # use the whole input as API query
+
+    search_text = skills_input.strip()
+
+
     selected_location = (
         PAKISTAN_CITIES[
             location_name
@@ -861,13 +984,13 @@ if search_clicked:
 
 
     with st.spinner(
-        "🔎 Finding the best jobs for you..."
+        "🔎 Finding jobs for you..."
     ):
 
         try:
 
             jobs = get_jobs(
-                user_skills,
+                search_text,
                 selected_location,
                 RAPIDAPI_KEY,
                 job_type
@@ -889,16 +1012,15 @@ if search_clicked:
         )
 
         st.info(
-            "Try broader skills such as "
-            "JavaScript, Python, React or "
-            "Software Developer."
+            "Try: JavaScript, React, Python "
+            "or Web Developer."
         )
 
         st.stop()
 
 
     # =====================================================
-    # ANALYZE JOBS
+    # ANALYZE
     # =====================================================
 
     analyzed_jobs = []
@@ -972,6 +1094,7 @@ if search_clicked:
 
 
         if not title:
+
             continue
 
 
@@ -983,8 +1106,10 @@ if search_clicked:
             continue
 
 
-        score, matched = calculate_match(
+        score, matched_skills, matched_roles = calculate_match(
+
             user_skills,
+            user_roles,
             title,
             description
         )
@@ -998,14 +1123,26 @@ if search_clicked:
 
         location_parts = []
 
+
         if city:
-            location_parts.append(city)
+
+            location_parts.append(
+                city
+            )
+
 
         if state:
-            location_parts.append(state)
+
+            location_parts.append(
+                state
+            )
+
 
         if country:
-            location_parts.append(country)
+
+            location_parts.append(
+                country
+            )
 
 
         full_location = ", ".join(
@@ -1020,7 +1157,9 @@ if search_clicked:
         ).lower()
 
 
-        # Experience filter
+        # -------------------------------------------------
+        # EXPERIENCE FILTER
+        # -------------------------------------------------
 
         if experience == "Entry Level":
 
@@ -1035,8 +1174,8 @@ if search_clicked:
             ]
 
             if not any(
-                x in job_text
-                for x in keywords
+                word in job_text
+                for word in keywords
             ):
 
                 continue
@@ -1054,8 +1193,8 @@ if search_clicked:
             ]
 
             if not any(
-                x in job_text
-                for x in keywords
+                word in job_text
+                for word in keywords
             ):
 
                 continue
@@ -1071,8 +1210,8 @@ if search_clicked:
             ]
 
             if not any(
-                x in job_text
-                for x in keywords
+                word in job_text
+                for word in keywords
             ):
 
                 continue
@@ -1089,8 +1228,8 @@ if search_clicked:
             ]
 
             if not any(
-                x in job_text
-                for x in keywords
+                word in job_text
+                for word in keywords
             ):
 
                 continue
@@ -1112,9 +1251,14 @@ if search_clicked:
 
             "score": score,
 
-            "matched": matched,
+            "matched_skills":
+                matched_skills,
 
-            "missing": missing
+            "matched_roles":
+                matched_roles,
+
+            "missing":
+                missing
         })
 
 
@@ -1131,7 +1275,7 @@ if search_clicked:
     if not analyzed_jobs:
 
         st.warning(
-            "Jobs were found, but none matched "
+            "Jobs were found but none passed "
             "your selected filters."
         )
 
@@ -1166,8 +1310,7 @@ if search_clicked:
 
 
     st.markdown(
-        '<div class="section-title">📊 Search Overview</div>',
-        unsafe_allow_html=True
+        "## 📊 Search Overview"
     )
 
 
@@ -1178,16 +1321,13 @@ if search_clicked:
 
         st.markdown(
             f"""
-            <div class="stat-card">
-
-                <div class="stat-number">
+            <div class="stat-box">
+                <div class="stat-value">
                     {total_jobs}
                 </div>
-
                 <div class="stat-label">
                     Relevant Jobs
                 </div>
-
             </div>
             """,
             unsafe_allow_html=True
@@ -1198,16 +1338,13 @@ if search_clicked:
 
         st.markdown(
             f"""
-            <div class="stat-card">
-
-                <div class="stat-number">
+            <div class="stat-box">
+                <div class="stat-value">
                     {excellent_jobs}
                 </div>
-
                 <div class="stat-label">
                     Excellent Matches
                 </div>
-
             </div>
             """,
             unsafe_allow_html=True
@@ -1218,16 +1355,13 @@ if search_clicked:
 
         st.markdown(
             f"""
-            <div class="stat-card">
-
-                <div class="stat-number">
+            <div class="stat-box">
+                <div class="stat-value">
                     {average_score}%
                 </div>
-
                 <div class="stat-label">
                     Average Match
                 </div>
-
             </div>
             """,
             unsafe_allow_html=True
@@ -1239,52 +1373,54 @@ if search_clicked:
     # =====================================================
 
     st.markdown(
-        '<div class="section-title">🎯 Best Job Matches</div>',
-        unsafe_allow_html=True
+        "## 🎯 Best Job Matches"
     )
 
 
     for index, job in enumerate(
-        analyzed_jobs[:number_of_jobs],
+        analyzed_jobs[
+            :number_of_jobs
+        ],
         start=1
     ):
+
 
         score = job["score"]
 
 
         if score >= 75:
 
-            label = "Excellent Match"
-            icon = "🟢"
+            match_icon = "🟢"
+            match_text = "Excellent Match"
 
         elif score >= 50:
 
-            label = "Good Match"
-            icon = "🟡"
+            match_icon = "🟡"
+            match_text = "Good Match"
 
         elif score >= 25:
 
-            label = "Partial Match"
-            icon = "🟠"
+            match_icon = "🟠"
+            match_text = "Partial Match"
 
         else:
 
-            label = "Low Match"
-            icon = "🔴"
+            match_icon = "🔴"
+            match_text = "Low Match"
 
 
         st.markdown(
-            '<div class="job-card">',
+            '<div class="job-box">',
             unsafe_allow_html=True
         )
 
 
-        col1, col2 = st.columns(
+        left, right = st.columns(
             [5, 1]
         )
 
 
-        with col1:
+        with left:
 
             st.markdown(
                 f"""
@@ -1292,11 +1428,15 @@ if search_clicked:
                     {index}. {job["title"]}
                 </div>
 
-                <div class="company">
+                <div class="job-company">
                     🏢 {job["company"]}
                 </div>
 
-                <div class="meta">
+                <div style="
+                    color:#cbd5e1;
+                    font-size:13px;
+                    margin-top:10px;
+                ">
                     📍 {job["location"] or "Pakistan"}
                     &nbsp;&nbsp; • &nbsp;&nbsp;
                     💼 {job["employment"]}
@@ -1306,20 +1446,16 @@ if search_clicked:
             )
 
 
-        with col2:
+        with right:
 
             st.markdown(
                 f"""
-                <div class="match-box">
+                <div class="match-score">
+                    {score}%
+                </div>
 
-                    <div class="match-number">
-                        {score}%
-                    </div>
-
-                    <div class="match-label">
-                        {icon} {label}
-                    </div>
-
+                <div class="match-text">
+                    {match_icon} {match_text}
                 </div>
                 """,
                 unsafe_allow_html=True
@@ -1328,33 +1464,58 @@ if search_clicked:
 
         # Matching skills
 
-        if job["matched"]:
+        if job["matched_skills"]:
 
-            chips = ""
+            st.markdown(
+                '<div class="skill-title">'
+                'MATCHING SKILLS'
+                '</div>',
+                unsafe_allow_html=True
+            )
 
-            for skill in job["matched"]:
+            skills_html = ""
 
-                chips += (
-                    f'<span class="skill-chip">'
+            for skill in job[
+                "matched_skills"
+            ]:
+
+                skills_html += (
+                    f'<span class="skill">'
                     f'✓ {skill}'
                     f'</span>'
                 )
 
+            st.markdown(
+                skills_html,
+                unsafe_allow_html=True
+            )
+
+
+        # Matching role
+
+        if job["matched_roles"]:
 
             st.markdown(
-                f"""
-                <div style="margin-top:18px;">
-                    <div style="
-                        color:#94a3b8;
-                        font-size:12px;
-                        margin-bottom:7px;
-                    ">
-                        MATCHING SKILLS
-                    </div>
+                '<div class="skill-title">'
+                'ROLE MATCH'
+                '</div>',
+                unsafe_allow_html=True
+            )
 
-                    {chips}
-                </div>
-                """,
+            roles_html = ""
+
+            for role in job[
+                "matched_roles"
+            ]:
+
+                roles_html += (
+                    f'<span class="skill">'
+                    f'✓ {role}'
+                    f'</span>'
+                )
+
+            st.markdown(
+                roles_html,
                 unsafe_allow_html=True
             )
 
@@ -1363,31 +1524,27 @@ if search_clicked:
 
         if job["missing"]:
 
-            chips = ""
+            st.markdown(
+                '<div class="skill-title">'
+                'SKILLS TO LEARN'
+                '</div>',
+                unsafe_allow_html=True
+            )
 
-            for skill in job["missing"]:
+            missing_html = ""
 
-                chips += (
-                    f'<span class="missing-chip">'
+            for skill in job[
+                "missing"
+            ]:
+
+                missing_html += (
+                    f'<span class="missing">'
                     f'+ {skill}'
                     f'</span>'
                 )
 
-
             st.markdown(
-                f"""
-                <div style="margin-top:14px;">
-                    <div style="
-                        color:#94a3b8;
-                        font-size:12px;
-                        margin-bottom:7px;
-                    ">
-                        SKILLS TO LEARN
-                    </div>
-
-                    {chips}
-                </div>
-                """,
+                missing_html,
                 unsafe_allow_html=True
             )
 
@@ -1397,7 +1554,7 @@ if search_clicked:
         if job["description"]:
 
             with st.expander(
-                "📄 View job description"
+                "📄 View Job Description"
             ):
 
                 st.write(
@@ -1411,7 +1568,8 @@ if search_clicked:
 
             st.link_button(
                 "🚀 Apply Now",
-                job["apply_link"]
+                job["apply_link"],
+                use_container_width=False
             )
 
 
@@ -1428,13 +1586,11 @@ if search_clicked:
 st.markdown(
     """
     <div class="footer">
-
         💼 JobPilot AI
         &nbsp; • &nbsp;
         Pakistan Technology Job Search
         &nbsp; • &nbsp;
         Powered by JSearch
-
     </div>
     """,
     unsafe_allow_html=True
