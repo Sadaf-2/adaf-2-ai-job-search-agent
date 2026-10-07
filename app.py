@@ -1,4 +1,5 @@
 import streamlit as st
+import requests
 
 st.set_page_config(
     page_title="AI Job Search Assistant",
@@ -16,7 +17,7 @@ skills = st.text_input(
 
 location = st.text_input(
     "Preferred location",
-    placeholder="e.g. Remote, Islamabad, Rawalpindi"
+    placeholder="e.g. Rawalpindi, Islamabad, Remote"
 )
 
 job_type = st.selectbox(
@@ -25,10 +26,64 @@ job_type = st.selectbox(
 )
 
 if st.button("🔍 Find Jobs"):
-    if skills and location:
-        st.success("Job search started!")
-        st.write("Skills:", skills)
-        st.write("Location:", location)
-        st.write("Job Type:", job_type)
+
+    if not skills:
+        st.warning("Please enter your skills.")
     else:
-        st.warning("Please enter your skills and preferred location.")
+
+        st.info("Searching for jobs...")
+
+        try:
+            url = "https://remotive.com/api/remote-jobs"
+
+            response = requests.get(url, timeout=15)
+
+            if response.status_code == 200:
+
+                data = response.json()
+                jobs = data.get("jobs", [])
+
+                st.success(f"Found {len(jobs)} jobs!")
+
+                # Show first 10 jobs
+                for job in jobs[:10]:
+
+                    st.subheader(job.get("title", "No title"))
+
+                    st.write(
+                        f"🏢 **Company:** {job.get('company_name', 'Unknown')}"
+                    )
+
+                    st.write(
+                        f"📍 **Location:** {job.get('candidate_required_location', 'Remote')}"
+                    )
+
+                    st.write(
+                        f"📅 **Type:** {job.get('job_type', 'Unknown')}"
+                    )
+
+                    description = job.get("description", "")
+
+                    # Remove HTML from description
+                    import re
+
+                    clean_description = re.sub(
+                        "<.*?>",
+                        "",
+                        description
+                    )
+
+                    st.write(clean_description[:500] + "...")
+
+                    st.link_button(
+                        "Apply for this job",
+                        job.get("url", "#")
+                    )
+
+                    st.divider()
+
+            else:
+                st.error("Could not fetch jobs.")
+
+        except Exception as e:
+            st.error(f"Error: {e}")
