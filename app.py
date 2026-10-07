@@ -4,9 +4,9 @@ import re
 import html
 
 
-# =========================
-# PAGE SETTINGS
-# =========================
+# =========================================================
+# PAGE
+# =========================================================
 
 st.set_page_config(
     page_title="Pakistan AI Job Search Assistant",
@@ -14,21 +14,15 @@ st.set_page_config(
     layout="wide"
 )
 
-
-# =========================
-# TITLE
-# =========================
-
 st.title("💼 Pakistan AI Job Search Assistant")
-
 st.write(
     "Find relevant technology jobs in Pakistan based on your skills."
 )
 
 
-# =========================
-# PAKISTAN LOCATIONS
-# =========================
+# =========================================================
+# LOCATIONS
+# =========================================================
 
 PAKISTAN_CITIES = {
     "All Pakistan": "Pakistan",
@@ -43,9 +37,9 @@ PAKISTAN_CITIES = {
 }
 
 
-# =========================
-# TECHNOLOGY KEYWORDS
-# =========================
+# =========================================================
+# TECH KEYWORDS
+# =========================================================
 
 TECH_KEYWORDS = [
     "software",
@@ -109,165 +103,77 @@ TECH_KEYWORDS = [
 ]
 
 
-# =========================
+# =========================================================
 # SKILL ALIASES
-# =========================
+# =========================================================
 
 SKILL_ALIASES = {
-
-    "html": [
-        "html",
-        "html5"
-    ],
-
-    "css": [
-        "css",
-        "css3"
-    ],
-
-    "javascript": [
-        "javascript",
-        "js",
-        "ecmascript"
-    ],
-
-    "typescript": [
-        "typescript",
-        "ts"
-    ],
-
-    "react": [
-        "react",
-        "react.js",
-        "reactjs"
-    ],
-
-    "python": [
-        "python"
-    ],
-
-    "java": [
-        "java"
-    ],
-
-    "php": [
-        "php"
-    ],
-
-    "node": [
-        "node",
-        "node.js",
-        "nodejs"
-    ],
-
-    "fastapi": [
-        "fastapi"
-    ],
-
-    "flask": [
-        "flask"
-    ],
-
-    "django": [
-        "django"
-    ],
-
-    "sql": [
-        "sql",
-        "mysql",
-        "postgresql",
-        "postgres"
-    ],
-
-    "mongodb": [
-        "mongodb",
-        "mongo"
-    ],
-
-    "git": [
-        "git",
-        "github",
-        "gitlab"
-    ],
-
-    "figma": [
-        "figma"
-    ],
-
+    "html": ["html", "html5"],
+    "css": ["css", "css3"],
+    "javascript": ["javascript", "js", "ecmascript"],
+    "typescript": ["typescript", "ts"],
+    "react": ["react", "react.js", "reactjs"],
+    "python": ["python"],
+    "java": ["java"],
+    "php": ["php"],
+    "node": ["node", "node.js", "nodejs"],
+    "fastapi": ["fastapi"],
+    "flask": ["flask"],
+    "django": ["django"],
+    "sql": ["sql", "mysql", "postgresql", "postgres"],
+    "mongodb": ["mongodb", "mongo"],
+    "git": ["git", "github", "gitlab"],
+    "figma": ["figma"],
     "ui/ux": [
         "ui/ux",
         "ui ux",
         "user interface",
         "user experience"
     ],
-
-    "api": [
-        "api",
-        "rest api",
-        "restful api"
-    ],
-
-    "redux": [
-        "redux"
-    ],
-
-    "nextjs": [
-        "next.js",
-        "nextjs"
-    ],
-
-    "tailwind": [
-        "tailwind",
-        "tailwind css"
-    ],
-
-    "bootstrap": [
-        "bootstrap"
-    ],
-
-    "docker": [
-        "docker"
-    ],
-
-    "aws": [
-        "aws"
-    ],
-
-    "azure": [
-        "azure"
-    ],
-
-    "flutter": [
-        "flutter"
-    ],
-
-    "react native": [
-        "react native"
-    ]
+    "api": ["api", "rest api", "restful api"],
+    "redux": ["redux"],
+    "nextjs": ["next.js", "nextjs"],
+    "tailwind": ["tailwind", "tailwind css"],
+    "bootstrap": ["bootstrap"],
+    "docker": ["docker"],
+    "aws": ["aws"],
+    "azure": ["azure"],
+    "flutter": ["flutter"],
+    "react native": ["react native"]
 }
 
 
-# =========================
+# =========================================================
 # CLEAN TEXT
-# =========================
+# =========================================================
 
 def clean_text(text):
 
     if not text:
         return ""
 
-    text = re.sub(r"<[^>]+>", " ", text)
+    text = str(text)
+
+    text = re.sub(
+        r"<[^>]+>",
+        " ",
+        text
+    )
 
     text = html.unescape(text)
 
-    text = re.sub(r"\s+", " ", text)
+    text = re.sub(
+        r"\s+",
+        " ",
+        text
+    )
 
     return text.strip()
 
 
-# =========================
+# =========================================================
 # USER SKILLS
-# =========================
+# =========================================================
 
 def get_user_skills(skill_text):
 
@@ -283,32 +189,38 @@ def get_user_skills(skill_text):
     return skills
 
 
-# =========================
-# CHECK TECH JOB
-# =========================
+# =========================================================
+# TECH JOB CHECK
+# =========================================================
 
 def is_tech_job(title, description):
 
-    text = (title + " " + description).lower()
+    text = (
+        str(title)
+        + " "
+        + str(description)
+    ).lower()
 
-    for keyword in TECH_KEYWORDS:
-
-        if keyword in text:
-            return True
-
-    return False
+    return any(
+        keyword in text
+        for keyword in TECH_KEYWORDS
+    )
 
 
-# =========================
-# CALCULATE MATCH
-# =========================
+# =========================================================
+# MATCH SCORE
+# =========================================================
 
-def calculate_match(user_skills, job_title, job_description):
+def calculate_match(
+    user_skills,
+    job_title,
+    job_description
+):
 
     text = (
-        job_title +
-        " " +
-        job_description
+        str(job_title)
+        + " "
+        + str(job_description)
     ).lower()
 
     matched = []
@@ -320,45 +232,38 @@ def calculate_match(user_skills, job_title, job_description):
             [skill]
         )
 
-        found = False
-
         for alias in aliases:
 
             if alias.lower() in text:
 
-                found = True
+                matched.append(skill)
                 break
 
-        if found:
-            matched.append(skill)
+    if not user_skills:
 
-    if len(user_skills) == 0:
+        return 0, []
 
-        score = 0
-
-    else:
-
-        score = int(
-            (len(matched) / len(user_skills))
-            * 100
-        )
+    score = int(
+        len(matched)
+        / len(user_skills)
+        * 100
+    )
 
     return score, matched
 
 
-# =========================
-# FIND MISSING SKILLS
-# =========================
+# =========================================================
+# MISSING SKILLS
+# =========================================================
 
 def find_missing_skills(
     user_skills,
     job_description
 ):
 
-    text = job_description.lower()
+    text = str(job_description).lower()
 
     common_skills = [
-
         "html",
         "css",
         "javascript",
@@ -383,7 +288,6 @@ def find_missing_skills(
         "azure",
         "flutter",
         "react native"
-
     ]
 
     missing = []
@@ -408,15 +312,14 @@ def find_missing_skills(
                 break
 
         if found:
-
             missing.append(skill)
 
     return missing[:8]
 
 
-# =========================
-# JSEARCH API
-# =========================
+# =========================================================
+# GET JOBS FROM JSEARCH V5
+# =========================================================
 
 def get_jobs(
     query,
@@ -425,106 +328,104 @@ def get_jobs(
     job_type
 ):
 
-    # IMPORTANT:
-    # JSearch V5 endpoint
-
     url = (
         "https://jsearch.p.rapidapi.com/"
         "search-v2"
     )
 
     headers = {
-
         "X-RapidAPI-Key": api_key,
-
-        "X-RapidAPI-Host":
-            "jsearch.p.rapidapi.com"
+        "X-RapidAPI-Host": "jsearch.p.rapidapi.com"
     }
 
     params = {
-
-        "query":
-            f"{query} jobs in {location}",
-
+        "query": f"{query} jobs in {location}",
         "num_pages": "1",
-
         "country": "pk",
-
         "language": "en",
-
         "date_posted": "all"
     }
 
-
-    # =========================
-    # JOB TYPE
-    # =========================
-
     if job_type == "Full-time":
-
         params["employment_types"] = "FULLTIME"
 
     elif job_type == "Part-time":
-
         params["employment_types"] = "PARTTIME"
 
     elif job_type == "Internship":
-
         params["employment_types"] = "INTERN"
 
     elif job_type == "Contract":
-
         params["employment_types"] = "CONTRACTOR"
 
-
-    # =========================
-    # REQUEST
-    # =========================
-
     response = requests.get(
-
         url,
-
         headers=headers,
-
         params=params,
-
         timeout=30
     )
-
 
     if response.status_code != 200:
 
         raise Exception(
-            f"API Error "
-            f"{response.status_code}: "
+            f"API Error {response.status_code}: "
             f"{response.text}"
         )
 
+    result = response.json()
 
-    data = response.json()
+    # -----------------------------------------------------
+    # SAFELY READ API RESPONSE
+    # -----------------------------------------------------
 
-    return data.get("data", [])
+    if not isinstance(result, dict):
+
+        raise Exception(
+            "Unexpected API response format."
+        )
+
+    jobs = result.get("data", [])
+
+    if jobs is None:
+        return []
+
+    if not isinstance(jobs, list):
+
+        raise Exception(
+            "JSearch returned an unexpected "
+            "data format."
+        )
+
+    # -----------------------------------------------------
+    # ONLY KEEP DICTIONARY JOBS
+    # -----------------------------------------------------
+
+    valid_jobs = []
+
+    for item in jobs:
+
+        if isinstance(item, dict):
+            valid_jobs.append(item)
+
+    return valid_jobs
 
 
-# =========================
-# RAPIDAPI KEY
-# =========================
+# =========================================================
+# RAPIDAPI SECRET
+# =========================================================
 
 try:
 
-    RAPIDAPI_KEY = st.secrets[
-        "RAPIDAPI_KEY"
-    ]
+    RAPIDAPI_KEY = st.secrets["RAPIDAPI_KEY"]
 
 except Exception:
 
     RAPIDAPI_KEY = ""
 
 
-# =========================
+# =========================================================
 # SIDEBAR
-# =========================
+# =========================================================
 
 with st.sidebar:
 
@@ -540,39 +441,24 @@ with st.sidebar:
     )
 
 
-# =========================
-# USER SKILLS
-# =========================
+# =========================================================
+# INPUTS
+# =========================================================
 
 skills_input = st.text_input(
-
     "💻 Your Skills",
-
-    placeholder=
-    "HTML, CSS, JavaScript, React"
+    placeholder="HTML, CSS, JavaScript, React"
 )
 
 
-# =========================
-# LOCATION
-# =========================
-
 location_name = st.selectbox(
-
     "📍 Job Location",
-
     list(PAKISTAN_CITIES.keys())
 )
 
 
-# =========================
-# JOB TYPE
-# =========================
-
 job_type = st.selectbox(
-
     "💼 Job Type",
-
     [
         "Any",
         "Full-time",
@@ -583,14 +469,8 @@ job_type = st.selectbox(
 )
 
 
-# =========================
-# EXPERIENCE
-# =========================
-
 experience = st.selectbox(
-
     "🎓 Experience Level",
-
     [
         "Any",
         "Entry Level",
@@ -601,32 +481,22 @@ experience = st.selectbox(
 )
 
 
-# =========================
-# NUMBER OF JOBS
-# =========================
-
 number_of_jobs = st.slider(
-
     "🔢 Number of Jobs",
-
     5,
     30,
     15
 )
 
 
-# =========================
-# SEARCH BUTTON
-# =========================
+# =========================================================
+# SEARCH
+# =========================================================
 
 if st.button(
     "🔍 Find Pakistan Tech Jobs",
     type="primary"
 ):
-
-    # =========================
-    # CHECK API KEY
-    # =========================
 
     if not RAPIDAPI_KEY:
 
@@ -639,11 +509,7 @@ if st.button(
         st.stop()
 
 
-    # =========================
-    # CHECK SKILLS
-    # =========================
-
-    if not skills_input:
+    if not skills_input.strip():
 
         st.warning(
             "Please enter your skills first."
@@ -652,46 +518,30 @@ if st.button(
         st.stop()
 
 
-    # =========================
-    # PREPARE SKILLS
-    # =========================
-
     user_skills = get_user_skills(
         skills_input
     )
 
 
     selected_location = (
-        PAKISTAN_CITIES[
-            location_name
-        ]
+        PAKISTAN_CITIES[location_name]
     )
 
 
-    # =========================
+    # -----------------------------------------------------
     # SEARCH QUERY
-    # =========================
+    # -----------------------------------------------------
 
-    if location_name == "All Pakistan":
-
-        search_query = (
-            "software developer "
-            "web developer "
-            "technology"
-        )
-
-    else:
-
-        search_query = (
-            "software developer "
-            "web developer "
-            "technology"
-        )
+    search_query = (
+        "software developer "
+        "web developer "
+        "technology"
+    )
 
 
-    # =========================
-    # SEARCH JOBS
-    # =========================
+    # -----------------------------------------------------
+    # FETCH
+    # -----------------------------------------------------
 
     with st.spinner(
         "🔎 Searching Pakistan tech jobs..."
@@ -700,13 +550,9 @@ if st.button(
         try:
 
             jobs = get_jobs(
-
                 search_query,
-
                 selected_location,
-
                 RAPIDAPI_KEY,
-
                 job_type
             )
 
@@ -719,38 +565,57 @@ if st.button(
             st.stop()
 
 
-    # =========================
-    # ANALYZE JOBS
-    # =========================
+    # =====================================================
+    # ANALYZE
+    # =====================================================
 
     analyzed_jobs = []
 
 
     for job in jobs:
 
-        title = job.get(
-            "job_title",
-            ""
+        # SAFETY CHECK
+        if not isinstance(job, dict):
+            continue
+
+
+        title = str(
+            job.get(
+                "job_title",
+                ""
+            ) or ""
         )
 
-        company = job.get(
-            "employer_name",
-            "Unknown Company"
+
+        company = str(
+            job.get(
+                "employer_name",
+                "Unknown Company"
+            ) or "Unknown Company"
         )
 
-        city = job.get(
-            "job_city",
-            ""
+
+        city = str(
+            job.get(
+                "job_city",
+                ""
+            ) or ""
         )
 
-        state = job.get(
-            "job_state",
-            ""
+
+        state = str(
+            job.get(
+                "job_state",
+                ""
+            ) or ""
         )
 
-        country = job.get(
-            "job_country",
-            "Pakistan"
+
+        country = str(
+            job.get(
+                "job_country",
+                "Pakistan"
+            ) or "Pakistan"
         )
 
 
@@ -762,21 +627,25 @@ if st.button(
         )
 
 
-        employment = job.get(
-            "job_employment_type",
-            "Not specified"
+        employment = str(
+            job.get(
+                "job_employment_type",
+                "Not specified"
+            ) or "Not specified"
         )
 
 
-        apply_link = job.get(
-            "job_apply_link",
-            ""
+        apply_link = str(
+            job.get(
+                "job_apply_link",
+                ""
+            ) or ""
         )
 
 
-        # =========================
-        # TECH JOB FILTER
-        # =========================
+        # -------------------------------------------------
+        # TECH FILTER
+        # -------------------------------------------------
 
         if not is_tech_job(
             title,
@@ -786,154 +655,127 @@ if st.button(
             continue
 
 
-        # =========================
-        # MATCH SCORE
-        # =========================
+        # -------------------------------------------------
+        # MATCH
+        # -------------------------------------------------
 
         score, matched = calculate_match(
-
             user_skills,
-
             title,
-
             description
         )
 
 
-        # =========================
-        # MISSING SKILLS
-        # =========================
+        # -------------------------------------------------
+        # MISSING
+        # -------------------------------------------------
 
         missing = find_missing_skills(
-
             user_skills,
-
             description
         )
 
 
-        # =========================
+        # -------------------------------------------------
         # LOCATION
-        # =========================
+        # -------------------------------------------------
 
-        location_parts = [
+        location_parts = []
 
-            x
+        if city:
+            location_parts.append(city)
 
-            for x in [
+        if state:
+            location_parts.append(state)
 
-                city,
-                state,
-                country
-
-            ]
-
-            if x
-        ]
-
+        if country:
+            location_parts.append(country)
 
         full_location = ", ".join(
             location_parts
         )
 
 
-        # =========================
+        # -------------------------------------------------
         # EXPERIENCE FILTER
-        # =========================
+        # -------------------------------------------------
 
         job_text = (
-            title +
-            " " +
-            description
+            title
+            + " "
+            + description
         ).lower()
 
 
         if experience == "Entry Level":
 
+            keywords = [
+                "entry level",
+                "no experience",
+                "fresh graduate",
+                "junior"
+            ]
+
             if not any(
-
                 word in job_text
-
-                for word in [
-
-                    "entry level",
-                    "no experience",
-                    "fresh graduate",
-                    "fresh graduate",
-                    "junior"
-
-                ]
-
+                for word in keywords
             ):
-
                 continue
 
 
         elif experience == "Junior":
 
+            keywords = [
+                "junior",
+                "entry level",
+                "fresh graduate",
+                "0-2 years",
+                "1-2 years"
+            ]
+
             if not any(
-
                 word in job_text
-
-                for word in [
-
-                    "junior",
-                    "entry level",
-                    "fresh graduate",
-                    "0-2 years",
-                    "1-2 years"
-
-                ]
-
+                for word in keywords
             ):
-
                 continue
 
 
         elif experience == "Mid Level":
 
+            keywords = [
+                "mid level",
+                "mid-level",
+                "2-5 years",
+                "3-5 years"
+            ]
+
             if not any(
-
                 word in job_text
-
-                for word in [
-
-                    "mid level",
-                    "mid-level",
-                    "2-5 years",
-                    "3-5 years"
-
-                ]
-
+                for word in keywords
             ):
-
                 continue
 
 
         elif experience == "Senior":
 
+            keywords = [
+                "senior",
+                "lead",
+                "manager",
+                "5+ years",
+                "5 years"
+            ]
+
             if not any(
-
                 word in job_text
-
-                for word in [
-
-                    "senior",
-                    "lead",
-                    "manager",
-                    "5+ years",
-                    "5 years"
-
-                ]
-
+                for word in keywords
             ):
-
                 continue
 
 
-        # =========================
-        # SAVE JOB
-        # =========================
+        # -------------------------------------------------
+        # SAVE
+        # -------------------------------------------------
 
         analyzed_jobs.append({
 
@@ -941,63 +783,45 @@ if st.button(
 
             "company": company,
 
-            "location":
-                full_location,
+            "location": full_location,
 
-            "description":
-                description,
+            "description": description,
 
-            "employment":
-                employment,
+            "employment": employment,
 
-            "apply_link":
-                apply_link,
+            "apply_link": apply_link,
 
-            "score":
-                score,
+            "score": score,
 
-            "matched":
-                matched,
+            "matched": matched,
 
-            "missing":
-                missing
-
+            "missing": missing
         })
 
 
-    # =========================
+    # =====================================================
     # SORT
-    # =========================
+    # =====================================================
 
     analyzed_jobs.sort(
-
-        key=lambda x:
-        x["score"],
-
+        key=lambda x: x["score"],
         reverse=True
     )
 
 
-    # =========================
-    # RESULT
-    # =========================
+    # =====================================================
+    # RESULTS
+    # =====================================================
 
     st.success(
-
-        f"Found "
-        f"{len(analyzed_jobs)} "
+        f"Found {len(analyzed_jobs)} "
         f"relevant Pakistan tech jobs."
     )
 
 
-    # =========================
-    # NO JOBS
-    # =========================
-
     if not analyzed_jobs:
 
         st.warning(
-
             "No relevant jobs found. "
             "Try broader skills such as "
             "JavaScript, Python, React "
@@ -1007,14 +831,14 @@ if st.button(
         st.stop()
 
 
-    # =========================
-    # DISPLAY
-    # =========================
-
     st.header(
         "🎯 Best Job Matches"
     )
 
+
+    # =====================================================
+    # DISPLAY JOBS
+    # =====================================================
 
     for job in analyzed_jobs[
         :number_of_jobs
@@ -1023,38 +847,22 @@ if st.button(
         score = job["score"]
 
 
-        # =========================
-        # MATCH LABEL
-        # =========================
-
         if score >= 75:
 
-            label = (
-                "🟢 Excellent Match"
-            )
+            label = "🟢 Excellent Match"
 
         elif score >= 50:
 
-            label = (
-                "🟡 Good Match"
-            )
+            label = "🟡 Good Match"
 
         elif score >= 25:
 
-            label = (
-                "🟠 Partial Match"
-            )
+            label = "🟠 Partial Match"
 
         else:
 
-            label = (
-                "🔴 Low Match"
-            )
+            label = "🔴 Low Match"
 
-
-        # =========================
-        # JOB CARD
-        # =========================
 
         with st.container():
 
@@ -1082,45 +890,30 @@ if st.button(
 
 
             st.markdown(
-                f"## {label} — {score}%"
+                f"### {label} — {score}%"
             )
 
-
-            # =========================
-            # MATCHING SKILLS
-            # =========================
 
             if job["matched"]:
 
                 st.write(
-
                     "✅ **Your matching skills:** "
-                    +
-                    ", ".join(
+                    + ", ".join(
                         job["matched"]
                     )
-
                 )
 
-
-            # =========================
-            # MISSING SKILLS
-            # =========================
 
             if job["missing"]:
 
                 st.write(
-
                     "📚 **Skills you may need:** "
-                    +
-                    ", ".join(
+                    + ", ".join(
                         job["missing"]
                     )
-
                 )
 
                 st.info(
-
                     "💡 Learn these skills "
                     "to increase your chances "
                     "for this type of job."
@@ -1129,16 +922,10 @@ if st.button(
             else:
 
                 st.success(
-
                     "🔥 Your listed skills "
-                    "match the job requirements "
-                    "well."
+                    "match the job requirements well."
                 )
 
-
-            # =========================
-            # DESCRIPTION
-            # =========================
 
             if job["description"]:
 
@@ -1151,16 +938,10 @@ if st.button(
                     )
 
 
-            # =========================
-            # APPLY
-            # =========================
-
             if job["apply_link"]:
 
                 st.link_button(
-
                     "🚀 Apply for Job",
-
                     job["apply_link"]
                 )
 
@@ -1168,11 +949,11 @@ if st.button(
             st.divider()
 
 
-# =========================
+# =========================================================
 # FOOTER
-# =========================
+# =========================================================
 
 st.caption(
     "💼 Pakistan AI Job Search Assistant "
-    "| Skills-based job matching"
+    "| JSearch + Skills Matching"
 )
